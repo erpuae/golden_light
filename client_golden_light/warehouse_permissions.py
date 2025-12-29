@@ -39,9 +39,14 @@ def permitted_warehouse(company=None):
     warehouse = []
     admin = 0
     user = frappe.session.user
+    roles = [r.role for r in frappe.get_all(
+        "Has Role",
+        filters={"parent": user},
+        fields=["role"]
+    )]
     whs = frappe.db.sql("""select for_value from `tabUser Permission`
                            where allow = "Warehouse" and user = '%s'""" %(user),as_dict=1)
-    if user == "Administrator":
+    if user == "Administrator" or "System Manager" in roles:
         warehouse = frappe.db.get_list('Warehouse',{'company':company},pluck='name')
     else:
         for w in whs:
