@@ -10,17 +10,17 @@ frappe.ui.form.on('Purchase Receipt', {
     //         $(".form-links").hide();
     //     }, 10);
     // },
-    validate(frm) {
-        validated = true;
-        for (const item of frm.doc.items) {
-            if(item.rate == 0) {
-                validated = false;
-                frappe.msgprint("Rate cannot be zero.");
-            }
-        }
+    // validate(frm) {
+    //     validated = true;
+    //     for (const item of frm.doc.items) {
+    //         if(item.rate == 0) {
+    //             validated = false;
+    //             frappe.msgprint("Rate cannot be zero.");
+    //         }
+    //     }
 
-        frappe.validated = validated;
-    },
+    //     frappe.validated = validated;
+    // },
 });
 
 function filter_items(frm) {
